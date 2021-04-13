@@ -1,0 +1,19 @@
+1) code base :  app is always tracked in a VCS such as: git
+		there is only one codebase per app ,but deploys for multiple environment
+		the code base is the same across all deploy
+2) Dependencies: nerver reies on implicit existence of system-wide packages
+		it uses a dependency isolation tool during execution to ensure that no implicit dependencies leak in from the surrounding system
+3) Config: store config in the environment
+4) Backing services: backing services should be treated as attached resources, change its without any changes to the app's code// use env
+5) Build, Release and Run: 	must strictly separate the build(binary), Release (binary + env config) and RUn(exec runtime), 
+				our instances are immutable so we cant make change upstream
+6) Processes: stateless and share-nothing , Any data that needs to persist must be stored in a statefull backing service
+7) Port Binding: Exportting servicdes via port binding will allow us to become a backing service for another app via URL
+8)Concurrency: processes are a first class citizen. Processes in the twelve-factor app take strong cues from the unix process model for running service daemons. 
+9) Disposability: minimize the startup time and shutdown them gracefully
+10) Dev/prod parity: 12 factors app is designed for CI  by keeping the gap between development and production small, looking at the three gaps:
+				- Make time gap small: code and deploy just minutes later
+				- make the personal gap small: write code -> view code in prod
+				- Make the tools gap small: keep dev and prod as similar as possible
+11) Logs: Treat logs as event streams
+12) Admin Process: it's not an admin dashboard, use command, An admi process is a way to interact with your app process to do one-off administrative or maintenancy tasks for the app
